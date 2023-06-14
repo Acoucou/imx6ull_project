@@ -1,0 +1,140 @@
+QWidget {
+border-image:url(:/images/video_pic/bg.png);
+}
+
+QLabel {
+border-image:none;
+}
+
+QWidget#hWidget1 {
+border-image:none;
+background:transparent;
+}
+
+QWidget#hWidget2 {
+border-image:none;
+background:transparent;
+}
+
+QWidget#vWidget1 {
+border-image:url(:/images/video_pic/mask.png);
+background:#24252a;
+}
+
+QWidget#vWidget0 {
+border-image:none;
+}
+
+QListWidget#listWidget {
+color:white;
+font-size: 15px;
+border:none;
+background: "#20ffffff";
+border-image:none;
+}
+
+QListWidget#listWidget:item:active {
+background: transparent;
+}
+
+QListWidget#listWidget:item {
+background: transparent;
+height:60;
+}
+
+QListWidget#listWidget:item:selected {
+color:#5edcf3;
+background: transparent;
+}
+
+QListWidget#listWidget:item:hover {
+background: transparent;
+color:#5edcf3;
+border:none;
+}
+
+
+QPushButton#btn_play {
+border-image:url(:/images/video_pic/btn_play1.png);
+}
+
+QPushButton#btn_play:hover {
+border-image:url(:/images/video_pic/btn_play2.png);
+}
+
+QPushButton#btn_play:checked {
+border-image:url(:/images/video_pic/btn_pause1.png);
+}
+
+QPushButton#btn_play:checked:hover {
+border-image:url(:/images/video_pic/btn_pause2.png);
+}
+
+QPushButton#btn_next {
+border-image:url(:/images/video_pic/btn_next1.png);
+}
+
+QPushButton#btn_next:hover {
+border-image:url(:/images/video_pic/btn_next2.png);
+}
+
+QPushButton#btn_volumedown {
+border-image:url(:/images/video_pic/btn_volumedown1.png);
+}
+
+QPushButton#btn_volumedown:hover {
+border-image:url(:/images/video_pic/btn_volumedown2.png);
+}
+
+QPushButton#btn_volumeup {
+border-image:url(:/images/video_pic/btn_volumeup1.png);
+}
+
+QPushButton#btn_volumeup:hover {
+border-image:url(:/images/video_pic/btn_volumeup2.png);
+}
+
+QSlider#durationSlider:handle:horizontal {
+border-image:url(:/images/video_pic/handle.png);
+}
+
+QSlider#durationSlider {
+border-image:none;
+}
+
+QSlider#durationSlider:add-page:horizontal {
+border-image:url(:/images/video_pic/add_page.png);
+}
+
+QSlider#volumeSlider {
+border-image:none;
+}
+QSlider#volumeSlider:handle:horizontal {
+border-image:url(:/images/video_pic/handle.png);
+}
+
+QSlider#volumeSlider:handle:horizontal {
+background:transparent;
+}
+
+QSlider#volumeSlider:add-page:horizontal {
+border-image:url(:/images/video_pic/add_page.png);
+}
+
+QPushButton#btn_screen {
+border-image:url(:/images/video_pic/btn_fullscreen1.png);
+}
+
+QPushButton#btn_screen:hover {
+border-image:url(:/images/video_pic/btn_fullscreen2.png);
+}
+
+QPushButton#btn_screen:checked {
+border-image:url(:/images/video_pic/btn_screen1.png);
+}
+
+QPushButton#btn_screen:checked:hover {
+border-image:url(:/images/video_pic/btn_screen2.png);
+}
+
+
