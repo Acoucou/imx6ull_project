@@ -1,0 +1,2 @@
+# imx6ull_project
+这是基于正点原子的imx6ull做的一个学习项目
