@@ -1,6 +1,6 @@
 # imx6ull_project
 
->演示地址：
+>演示地址：https://www.bilibili.com/video/BV13o4y177KX/
 
 ## 概述
 
