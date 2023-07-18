@@ -1,26 +1,26 @@
-#ifndef MAINWIDGET_H
-#define MAINWIDGET_H
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
 
-#include <QWidget>
+#include <QMainWindow>
 #include <QStackedWidget>
 #include <QHBoxLayout>
 #include <QListWidget>
 #include <QLabel>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWidget; }
+namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-class MainWidget : public QWidget
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWidget(QWidget *parent = nullptr);
-    ~MainWidget();
+    MainWindow(QWidget *parent = nullptr);
+    ~MainWindow();
 
 private:
-    Ui::MainWidget *ui;
+    Ui::MainWindow *ui;
 
     /* widget小部件 */
     QWidget *widget;
@@ -32,9 +32,5 @@ private:
     QStackedWidget *stackedWidget;
     /* 3个标签 */
     QLabel *label[3];
-
-    void windows_init();
-
-
 };
-#endif // MAINWIDGET_H
+#endif // MAINWINDOW_H

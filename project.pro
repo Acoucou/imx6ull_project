@@ -26,7 +26,7 @@ FORMS += \
     mainwidget.ui
 
 
- x86
+# x86
 INCLUDEPATH += /home/coucou/linux/opencv-3.4.1/x86_opencv/include
 LIBS += /home/coucou/linux/opencv-3.4.1/x86_opencv/lib/libopencv_core.so \
  /home/coucou/linux/opencv-3.4.1/x86_opencv/lib/libopencv_highgui.so \
@@ -41,11 +41,15 @@ LIBS += /home/coucou/linux/opencv-3.4.1/x86_opencv/lib/libopencv_core.so \
  /home/coucou/linux/opencv-3.4.1/x86_opencv/lib/libopencv_objdetect.so \
  /home/coucou/linux/opencv-3.4.1/x86_opencv/lib/libopencv_flann.so \
 
-# arm
-#TARGET_ARCH = $${QT_ARCH}
-#contains(TARGET_ARCH, arm){
-#INCLUDEPATH += /home/coucou/linux/opencv-3.4.1/install/include
+# mqtt lib
+unix:!macx: LIBS += -L$$PWD/lib/x86_qtmqtt/lib/ -lQt5Mqtt
 
+INCLUDEPATH += $$PWD/lib/x86_qtmqtt/src/.
+DEPENDPATH += $$PWD/lib/x86_qtmqtt/.
+
+
+# arm
+#INCLUDEPATH += /home/coucou/linux/opencv-3.4.1/install/include
 #LIBS += /home/coucou/linux/opencv-3.4.1/install/lib/libopencv_core.so \
 # /home/coucou/linux/opencv-3.4.1/install/lib/libopencv_highgui.so \
 # /home/coucou/linux/opencv-3.4.1/install/lib/libopencv_imgproc.so \
@@ -57,25 +61,13 @@ LIBS += /home/coucou/linux/opencv-3.4.1/x86_opencv/lib/libopencv_core.so \
 # /home/coucou/linux/opencv-3.4.1/install/lib/libopencv_ml.so \
 ## /home/coucou/linux/opencv-3.4.1/install/lib/libopencv_objdetect.so \
 # /home/coucou/linux/opencv-3.4.1/install/lib/libopencv_flann.so \
- 
 
+## mqtt lib
+#unix:!macx: LIBS += -L$$PWD/lib/arm_qtmqtt/lib/ -lQt5Mqtt
 
-#}else{
-#LIBS += -L/usr/lib \
-#     -lopencv_core \
-#     -lopencv_highgui \
-#     -lopencv_imgproc \
-#     -lopencv_videoio \
-#     -lopencv_imgcodecs \
-#     -lopencv_calib3d \
-#     -lopencv_features2d \
-#     -lopencv_video \
-#     -lopencv_ml \
-##     -lopencv_objdetect \
-#     -lopencv_flann
+#INCLUDEPATH += $$PWD/lib/arm_qtmqtt/.
+#DEPENDPATH += $$PWD/lib/arm_qtmqt/.
 
-# INCLUDEPATH += /usr/include
-#}
 
 
 # Default rules for deployment.
@@ -91,3 +83,4 @@ include(./hardware/hardware.pri)
 
 INCLUDEPATH += $$PWD/hardware
 INCLUDEPATH += $$PWD/form
+
