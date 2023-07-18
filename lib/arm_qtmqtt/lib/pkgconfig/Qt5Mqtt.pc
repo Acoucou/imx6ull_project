@@ -1,0 +1,13 @@
+prefix=/home/coucou/linux/qt/qt-everywhere-src-5.12.9/arm-qt
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+
+Name: Qt5 Mqtt
+Description: Qt Mqtt module
+Version: 5.12.9
+Libs: -L${libdir} -lQt5Mqtt 
+Cflags: -DQT_MQTT_LIB -I${includedir}/QtMqtt -I${includedir}
+Requires: Qt5Core Qt5Network
+

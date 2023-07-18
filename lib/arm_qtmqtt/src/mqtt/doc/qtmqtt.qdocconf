@@ -1,0 +1,49 @@
+include($QT_INSTALL_DOCS/global/qt-module-defaults.qdocconf)
+
+project                 = QtMqtt
+description             = Qt MQTT Reference Documentation
+version                 = $QT_VERSION
+
+examplesinstallpath = mqtt
+
+qhp.projects            = QtMqtt
+
+qhp.QtMqtt.file                = qtmqtt.qhp
+qhp.QtMqtt.namespace           = org.qt-project.qtmqtt.$QT_VERSION_TAG
+qhp.QtMqtt.virtualFolder       = qtmqtt
+qhp.QtMqtt.indexTitle          = Qt MQTT
+qhp.QtMqtt.indexRoot           =
+
+qhp.QtMqtt.filterAttributes    = qtmqtt $QT_VERSION qtrefdoc
+qhp.QtMqtt.customFilters.Qt.name = QtMqtt $QT_VERSION
+qhp.QtMqtt.customFilters.Qt.filterAttributes = qtmqtt $QT_VERSION
+
+qhp.QtMqtt.subprojects         = classes examples
+qhp.QtMqtt.subprojects.classes.title = C++ Classes
+qhp.QtMqtt.subprojects.classes.indexTitle = Qt MQTT C++ Classes
+qhp.QtMqtt.subprojects.classes.selectors = class fake:headerfile
+qhp.QtMqtt.subprojects.classes.sortPages = true
+
+qhp.QtMqtt.subprojects.examples.title         = Examples
+qhp.QtMqtt.subprojects.examples.indexTitle    = Qt MQTT Examples
+qhp.QtMqtt.subprojects.examples.selectors     = fake:example
+qhp.QtMqtt.subprojects.examples.sortPages     = true
+
+headerdirs  += ..
+sourcedirs  += ..
+exampledirs = ../../../examples/mqtt \
+              snippets
+imagedirs   += images \
+               ../../../examples/mqtt/doc/images
+excludedirs += ../qt4support
+
+Cpp.ignoretokens += Q_MQTT_EXPORT
+
+depends += qtcore qtdoc qtnetwork qmake qtwebsockets
+
+#add generic thumbnail images for example documentation that does not have an image.
+manifestmeta.thumbnail.names  += "QtMqtt/WebSockets MQTT Subscription*"
+
+navigation.landingpage = "Qt MQTT"
+navigation.cppclassespage = "Qt MQTT C++ Classes"
+navigation.homepage = "Qt for Automation"
