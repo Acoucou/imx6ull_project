@@ -20,7 +20,7 @@ Icm20608::Icm20608(QObject *parent) : QObject (parent)
 {
     timer_2060 = new QTimer();
 #if __arm__
-    system("insmod /home/root/driver/icm20608/icm20608.ko");
+//    system("insmod /home/root/driver/icm20608/icm20608.ko");
 #endif
     connect(timer_2060,SIGNAL(timeout()),this,SLOT(timer_timeout()));
 }
