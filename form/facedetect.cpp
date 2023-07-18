@@ -78,24 +78,7 @@ void faceDetect::layoutInit()
      */
     QList <QScreen *> list_screen =  QGuiApplication::screens();
 
-    /* 如果是ARM平台，直接设置大小为屏幕的大小 */
-//#if __arm__
-//    /* 重设大小 */
-//    this->resize(list_screen.at(0)->geometry().width(),
-//                 list_screen.at(0)->geometry().height());
-//#else
-//    /* 否则则设置主窗体大小为800x480 */
-//    this->resize(800, 480);
-//#endif
-
-
-    /* 显示图像最大画面为xx */
-//    ui->displayLabel->setMinimumWidth(scrollArea->width() * 0.75);
-//    ui->displayLabel->setMinimumHeight(scrollArea->height() * 0.75);
-
-
     /* 自动拉伸 */
-
     ui->displayLabel->setScaledContents(true);
 
     /* 设置一些属性 */
@@ -171,75 +154,77 @@ void faceDetect::closeDetect_clicked()
 
 void faceDetect::faceHaar_clicked()
 {
-//    String label = "Face";
-//    CascadeClassifier faceCascade;
-//    faceCascade.load("../project/face-haar/haarcascade_frontalface_alt2.xml");//加载分类器
+#if !__arm__
+    String label = "Face";
+    CascadeClassifier faceCascade;
+    faceCascade.load("../project/opencv_src/face-haar/haarcascade_frontalface_alt2.xml");//加载分类器
 
-//    capture1.open(0);// 打开摄像头
-//    //      capture.open("video.avi");    // 打开视频
-//    if (!capture1.isOpened())
-//    {
-//        //_cprintf("open camera failed. \n");
-//        return;
-//    }
-//    Mat img, imgGray;
-//    vector<Rect> faces;
-//    while (1)
-//    {
-//        capture1 >> img;// 读取图像至img
-//        if (img.empty())continue;
-//        if (img.channels() == 3)
-//            cvtColor(img, imgGray, CV_RGB2GRAY);
-//        else
-//        {
-//            imgGray = img;
-//        }
-//        //double start = cv::getTickCount();
-//        faceCascade.detectMultiScale(imgGray, faces, 1.2, 6, 0, Size(0, 0));// 检测人脸
-//        //double end = cv::getTickCount();
-//        //_cprintf("run time: %f ms\n", (end - start));
-//        if (faces.size()>0)
-//        {
-//            for (int i = 0; i<faces.size(); i++)
-//            {
-//                rectangle(img, Point(faces[i].x, faces[i].y), Point(faces[i].x + faces[i].width, faces[i].y + faces[i].height), Scalar(0, 255, 0), 1, 8);
-//                putText(img, label, Point(faces[i].x, faces[i].y -5), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255,0));
-//            }
-//        }
+    capture1.open(0);// 打开摄像头
+    //      capture.open("video.avi");    // 打开视频
+    if (!capture1.isOpened())
+    {
+        //_cprintf("open camera failed. \n");
+        return;
+    }
+    Mat img, imgGray;
+    vector<Rect> faces;
+    while (1)
+    {
+        capture1 >> img;// 读取图像至img
+        if (img.empty())continue;
+        if (img.channels() == 3)
+            cvtColor(img, imgGray, CV_RGB2GRAY);
+        else
+        {
+            imgGray = img;
+        }
+        //double start = cv::getTickCount();
+        faceCascade.detectMultiScale(imgGray, faces, 1.2, 6, 0, Size(0, 0));// 检测人脸
+        //double end = cv::getTickCount();
+        //_cprintf("run time: %f ms\n", (end - start));
+        if (faces.size()>0)
+        {
+            for (int i = 0; i<faces.size(); i++)
+            {
+                rectangle(img, Point(faces[i].x, faces[i].y), Point(faces[i].x + faces[i].width, faces[i].y + faces[i].height), Scalar(0, 255, 0), 1, 8);
+                putText(img, label, Point(faces[i].x, faces[i].y -5), FONT_HERSHEY_SIMPLEX, 0.5, Scalar(0, 255,0));
+            }
+        }
 
 
-//        /* USB摄像头和OV5640等都是RGB三通道，不考虑单/四通道摄像头 */
-//        if(img.type() == CV_8UC3) {
+        /* USB摄像头和OV5640等都是RGB三通道，不考虑单/四通道摄像头 */
+        if(img.type() == CV_8UC3) {
 
-//            /* 得到图像的的首地址 */
-//            const uchar *pimg = (const uchar*)img.data;
+            /* 得到图像的的首地址 */
+            const uchar *pimg = (const uchar*)img.data;
 
-//            /* 以img构造图片 */
-//            QImage qImage(pimg, img.cols, img.rows, img.step,
-//                          QImage::Format_RGB888);
+            /* 以img构造图片 */
+            QImage qImage(pimg, img.cols, img.rows, img.step,
+                          QImage::Format_RGB888);
 
-//            /* 在不改变实际图像数据的条件下，交换红蓝通道 */
-//            // return qImage.rgbSwapped();
+            /* 在不改变实际图像数据的条件下，交换红蓝通道 */
+            // return qImage.rgbSwapped();
 
-//            /* 显示图像 */
-//            ui->displayLabel->setPixmap(QPixmap::fromImage(qImage.rgbSwapped()));
-//        }
-//        else if(img.type() == CV_8UC4)
-//           {
+            /* 显示图像 */
+            ui->displayLabel->setPixmap(QPixmap::fromImage(qImage.rgbSwapped()));
+        }
+        else if(img.type() == CV_8UC4)
+           {
 
-//               const uchar *pSrc = (const uchar*)img.data;
-//               QImage qImage(pSrc, img.cols, img.rows, img.step, QImage::Format_ARGB32);
-//               // return qImage.copy();
+               const uchar *pSrc = (const uchar*)img.data;
+               QImage qImage(pSrc, img.cols, img.rows, img.step, QImage::Format_ARGB32);
+               // return qImage.copy();
 
-//               /* 显示图像 */
-//               ui->displayLabel->setPixmap(QPixmap::fromImage(qImage.copy()));
-//           }
+               /* 显示图像 */
+               ui->displayLabel->setPixmap(QPixmap::fromImage(qImage.copy()));
+           }
 
-////        imshow("CamerFace", img); // 显示
-//        if (waitKey(1) != -1)
-//            break;// delay ms 等待按键退出
+//        imshow("CamerFace", img); // 显示
+        if (waitKey(1) != -1)
+            break;// delay ms 等待按键退出
 
-//        if(cap_flag)
-//            break;
-//    }
+        if(cap_flag)
+            break;
+    }
+#endif
 }

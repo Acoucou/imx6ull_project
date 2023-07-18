@@ -9,7 +9,7 @@ opencv::opencv(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    srcImg = imread("../project/images/opencv_pic/01.jpeg");
+    srcImg = imread("../project/opencv_src/01.jpeg");
     cvtColor(srcImg, grayImg, CV_BGR2GRAY);
 
     Mat temp;
@@ -83,7 +83,7 @@ opencv::~opencv()
 }
 
 void opencv::seletpic_clicked(){
-     QString testFileName = QFileDialog::getOpenFileName(this,tr(""),"../project/images","files(*)");
+     QString testFileName = QFileDialog::getOpenFileName(this,tr(""),"../project/onencv_src","files(*)");
      srcImg = imread(testFileName.toStdString());
 
     cvtColor(srcImg, grayImg, CV_BGR2GRAY);
@@ -1286,167 +1286,167 @@ void outputCameraParam(void)
 }
 void opencv::camera2_clicked()
 {
-    //摄像头的分辨率
-    const int imageWidth = 640;
-    const int imageHeight = 480;
-    //横向的角点数目
-    const int boardWidth = 9;
-    //纵向的角点数目
-    const int boardHeight = 6;
-    //总的角点数目
-    const int boardCorner = boardWidth * boardHeight;
-    //相机标定时需要采用的图像帧数
-    const int frameNumber = 14;
-    //标定板黑白格子的大小 单位是mm
-    const int squareSize = 10;
-    //标定板的总内角点
-    const Size boardSize = Size(boardWidth, boardHeight);
-    Size imageSize = Size(imageWidth, imageHeight);
+//    //摄像头的分辨率
+//    const int imageWidth = 640;
+//    const int imageHeight = 480;
+//    //横向的角点数目
+//    const int boardWidth = 9;
+//    //纵向的角点数目
+//    const int boardHeight = 6;
+//    //总的角点数目
+//    const int boardCorner = boardWidth * boardHeight;
+//    //相机标定时需要采用的图像帧数
+//    const int frameNumber = 14;
+//    //标定板黑白格子的大小 单位是mm
+//    const int squareSize = 10;
+//    //标定板的总内角点
+//    const Size boardSize = Size(boardWidth, boardHeight);
+//    Size imageSize = Size(imageWidth, imageHeight);
 
 
-    //R旋转矢量 T平移矢量 E本征矩阵 F基础矩阵
-    vector<Mat> rvecs; //R
-    vector<Mat> tvecs; //T
-                       //左边摄像机所有照片角点的坐标集合
-    vector<vector<Point2f>> imagePointL;
-    //右边摄像机所有照片角点的坐标集合
-    vector<vector<Point2f>> imagePointR;
-    //各图像的角点的实际的物理坐标集合
-    vector<vector<Point3f>> objRealPoint;
-    //左边摄像机某一照片角点坐标集合
-    vector<Point2f> cornerL;
-    //右边摄像机某一照片角点坐标集合
-    vector<Point2f> cornerR;
+//    //R旋转矢量 T平移矢量 E本征矩阵 F基础矩阵
+//    vector<Mat> rvecs; //R
+//    vector<Mat> tvecs; //T
+//                       //左边摄像机所有照片角点的坐标集合
+//    vector<vector<Point2f>> imagePointL;
+//    //右边摄像机所有照片角点的坐标集合
+//    vector<vector<Point2f>> imagePointR;
+//    //各图像的角点的实际的物理坐标集合
+//    vector<vector<Point3f>> objRealPoint;
+//    //左边摄像机某一照片角点坐标集合
+//    vector<Point2f> cornerL;
+//    //右边摄像机某一照片角点坐标集合
+//    vector<Point2f> cornerR;
 
-    Mat rgbImageL, grayImageL;
-    Mat rgbImageR, grayImageR;
-    Mat intrinsic;
-    Mat distortion_coeff;
-    //校正旋转矩阵R，投影矩阵P，重投影矩阵Q
-    //映射表
-    Mat mapLx, mapLy, mapRx, mapRy;
-    Rect validROIL, validROIR;
-    //图像校正之后，会对图像进行裁剪，其中，validROI裁剪之后的区域
+//    Mat rgbImageL, grayImageL;
+//    Mat rgbImageR, grayImageR;
+//    Mat intrinsic;
+//    Mat distortion_coeff;
+//    //校正旋转矩阵R，投影矩阵P，重投影矩阵Q
+//    //映射表
+//    Mat mapLx, mapLy, mapRx, mapRy;
+//    Rect validROIL, validROIR;
+//    //图像校正之后，会对图像进行裁剪，其中，validROI裁剪之后的区域
 
-    Mat img;
-    int goodFrameCount = 1;
-    while (goodFrameCount <= frameNumber)
-    {
-        char filename[100];
-        /*读取左边的图像*/
-        sprintf(filename, "../project/camer_cab/left%02d.jpg", goodFrameCount);
-        rgbImageL = imread(filename, 1);
-        imshow("chessboardL", rgbImageL);
-        cvtColor(rgbImageL, grayImageL, CV_BGR2GRAY);
-        /*读取右边的图像*/
-        sprintf(filename, "../project/camer_cab/right%02d.jpg", goodFrameCount);
-        rgbImageR = imread(filename, 1);
-        cvtColor(rgbImageR, grayImageR, CV_BGR2GRAY);
+//    Mat img;
+//    int goodFrameCount = 1;
+//    while (goodFrameCount <= frameNumber)
+//    {
+//        char filename[100];
+//        /*读取左边的图像*/
+//        sprintf(filename, "../project/opencv_src/camer_cab/left%02d.jpg", goodFrameCount);
+//        rgbImageL = imread(filename, 1);
+//        imshow("chessboardL", rgbImageL);
+//        cvtColor(rgbImageL, grayImageL, CV_BGR2GRAY);
+//        /*读取右边的图像*/
+//        sprintf(filename, "../project/opencv_src/camer_cab/right%02d.jpg", goodFrameCount);
+//        rgbImageR = imread(filename, 1);
+//        cvtColor(rgbImageR, grayImageR, CV_BGR2GRAY);
 
-        bool isFindL, isFindR;
-        isFindL = findChessboardCorners(rgbImageL, boardSize, cornerL);
-        isFindR = findChessboardCorners(rgbImageR, boardSize, cornerR);
-        if (isFindL == true && isFindR == true)
-        {
-            cornerSubPix(grayImageL, cornerL, Size(5, 5), Size(-1, 1), TermCriteria(CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 20, 0.1));
-            drawChessboardCorners(rgbImageL, boardSize, cornerL, isFindL);
-            imshow("chessboardL", rgbImageL);
-            imagePointL.push_back(cornerL);
+//        bool isFindL, isFindR;
+//        isFindL = findChessboardCorners(rgbImageL, boardSize, cornerL);
+//        isFindR = findChessboardCorners(rgbImageR, boardSize, cornerR);
+//        if (isFindL == true && isFindR == true)
+//        {
+//            cornerSubPix(grayImageL, cornerL, Size(5, 5), Size(-1, 1), TermCriteria(CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 20, 0.1));
+//            drawChessboardCorners(rgbImageL, boardSize, cornerL, isFindL);
+//            imshow("chessboardL", rgbImageL);
+//            imagePointL.push_back(cornerL);
 
-            cornerSubPix(grayImageR, cornerR, Size(5, 5), Size(-1, -1), TermCriteria(CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 20, 0.1));
-            drawChessboardCorners(rgbImageR, boardSize, cornerR, isFindR);
-            imshow("chessboardR", rgbImageR);
-            imagePointR.push_back(cornerR);
+//            cornerSubPix(grayImageR, cornerR, Size(5, 5), Size(-1, -1), TermCriteria(CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 20, 0.1));
+//            drawChessboardCorners(rgbImageR, boardSize, cornerR, isFindR);
+//            imshow("chessboardR", rgbImageR);
+//            imagePointR.push_back(cornerR);
 
-            //_cprintf("the image %d is good\n",goodFrameCount);
-            goodFrameCount++;
-        }
-        else
-        {
-            //_cprintf("the image is bad please try again\n");
-        }
+//            //_cprintf("the image %d is good\n",goodFrameCount);
+//            goodFrameCount++;
+//        }
+//        else
+//        {
+//            //_cprintf("the image is bad please try again\n");
+//        }
 
-        if (waitKey(10) == 'q')
-        {
-            break;
-        }
-    }
+//        if (waitKey(10) == 'q')
+//        {
+//            break;
+//        }
+//    }
 
-    //计算实际的校正点的三维坐标，根据实际标定格子的大小来设置
+//    //计算实际的校正点的三维坐标，根据实际标定格子的大小来设置
 
-    calRealPoint(objRealPoint, boardWidth, boardHeight, frameNumber, squareSize);
-    //_cprintf("cal real successful\n");
+//    calRealPoint(objRealPoint, boardWidth, boardHeight, frameNumber, squareSize);
+//    //_cprintf("cal real successful\n");
 
-    //标定摄像头
-    double rms = stereoCalibrate(objRealPoint, imagePointL, imagePointR,
-        cameraMatrixL, distCoeffL,
-        cameraMatrixR, distCoeffR,
-        Size(imageWidth, imageHeight), R, T, E, F, CALIB_USE_INTRINSIC_GUESS,
-        TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 100, 1e-5));
+//    //标定摄像头
+//    double rms = stereoCalibrate(objRealPoint, imagePointL, imagePointR,
+//        cameraMatrixL, distCoeffL,
+//        cameraMatrixR, distCoeffR,
+//        Size(imageWidth, imageHeight), R, T, E, F, CALIB_USE_INTRINSIC_GUESS,
+//        TermCriteria(TermCriteria::COUNT + TermCriteria::EPS, 100, 1e-5));
 
-    //_cprintf("Stereo Calibration done with RMS error = %f\n",rms);
+//    //_cprintf("Stereo Calibration done with RMS error = %f\n",rms);
 
-    stereoRectify(cameraMatrixL, distCoeffL, cameraMatrixR, distCoeffR, imageSize, R, T, Rl,
-        Rr, Pl, Pr, Q, CALIB_ZERO_DISPARITY, -1, imageSize, &validROIL, &validROIR);
+//    stereoRectify(cameraMatrixL, distCoeffL, cameraMatrixR, distCoeffR, imageSize, R, T, Rl,
+//        Rr, Pl, Pr, Q, CALIB_ZERO_DISPARITY, -1, imageSize, &validROIL, &validROIR);
 
-    //摄像机校正映射
-    initUndistortRectifyMap(cameraMatrixL, distCoeffL, Rl, Pl, imageSize, CV_32FC1, mapLx, mapLy);
-    initUndistortRectifyMap(cameraMatrixR, distCoeffR, Rr, Pr, imageSize, CV_32FC1, mapRx, mapRy);
+//    //摄像机校正映射
+//    initUndistortRectifyMap(cameraMatrixL, distCoeffL, Rl, Pl, imageSize, CV_32FC1, mapLx, mapLy);
+//    initUndistortRectifyMap(cameraMatrixR, distCoeffR, Rr, Pr, imageSize, CV_32FC1, mapRx, mapRy);
 
-    Mat rectifyImageL, rectifyImageR;
-    cvtColor(grayImageL, rectifyImageL, CV_GRAY2BGR);
-    cvtColor(grayImageR, rectifyImageR, CV_GRAY2BGR);
+//    Mat rectifyImageL, rectifyImageR;
+//    cvtColor(grayImageL, rectifyImageL, CV_GRAY2BGR);
+//    cvtColor(grayImageR, rectifyImageR, CV_GRAY2BGR);
 
-    imshow("RecitifyL Before", rectifyImageL);
-    imshow("RecitifyR Before", rectifyImageR);
+//    imshow("RecitifyL Before", rectifyImageL);
+//    imshow("RecitifyR Before", rectifyImageR);
 
-    //经过remap之后，左右相机的图像已经共面并且行对准了
-    Mat rectifyImageL2, rectifyImageR2;
-    remap(rectifyImageL, rectifyImageL2, mapLx, mapLy, INTER_LINEAR);
-    remap(rectifyImageR, rectifyImageR2, mapRx, mapRy, INTER_LINEAR);
+//    //经过remap之后，左右相机的图像已经共面并且行对准了
+//    Mat rectifyImageL2, rectifyImageR2;
+//    remap(rectifyImageL, rectifyImageL2, mapLx, mapLy, INTER_LINEAR);
+//    remap(rectifyImageR, rectifyImageR2, mapRx, mapRy, INTER_LINEAR);
 
 
-    imshow("rectifyImageL", rectifyImageL2);
-    imshow("rectifyImageR", rectifyImageR2);
+//    imshow("rectifyImageL", rectifyImageL2);
+//    imshow("rectifyImageR", rectifyImageR2);
 
-    outputCameraParam();
-    //显示校正结果
-    Mat canvas;
-    double sf;
-    int w, h;
-    sf = 600. / MAX(imageSize.width, imageSize.height);
-    w = cvRound(imageSize.width * sf);
-    h = cvRound(imageSize.height * sf);
-    canvas.create(h, w * 2, CV_8UC3);
+//    outputCameraParam();
+//    //显示校正结果
+//    Mat canvas;
+//    double sf;
+//    int w, h;
+//    sf = 600. / MAX(imageSize.width, imageSize.height);
+//    w = cvRound(imageSize.width * sf);
+//    h = cvRound(imageSize.height * sf);
+//    canvas.create(h, w * 2, CV_8UC3);
 
-    //左图像画到画布上
-    Mat canvasPart = canvas(Rect(0, 0, w, h));
-    cv::resize(rectifyImageL2, canvasPart, canvasPart.size(), 0, 0, INTER_AREA);
-    Rect vroiL(cvRound(validROIL.x*sf), cvRound(validROIL.y*sf),
-        cvRound(validROIL.width*sf), cvRound(validROIL.height*sf));
-    rectangle(canvasPart, vroiL, Scalar(0, 0, 255), 3, 8);
+//    //左图像画到画布上
+//    Mat canvasPart = canvas(Rect(0, 0, w, h));
+//    cv::resize(rectifyImageL2, canvasPart, canvasPart.size(), 0, 0, INTER_AREA);
+//    Rect vroiL(cvRound(validROIL.x*sf), cvRound(validROIL.y*sf),
+//        cvRound(validROIL.width*sf), cvRound(validROIL.height*sf));
+//    rectangle(canvasPart, vroiL, Scalar(0, 0, 255), 3, 8);
 
-    //_cprintf("Painted ImageL\n");
+//    //_cprintf("Painted ImageL\n");
 
-    //右图像画到画布上
-    canvasPart = canvas(Rect(w, 0, w, h));
-    cv::resize(rectifyImageR2, canvasPart, canvasPart.size(), 0, 0, INTER_LINEAR);
-    Rect vroiR(cvRound(validROIR.x*sf), cvRound(validROIR.y*sf),
-        cvRound(validROIR.width*sf), cvRound(validROIR.height*sf));
-    rectangle(canvasPart, vroiR, Scalar(0, 255, 0), 3, 8);
+//    //右图像画到画布上
+//    canvasPart = canvas(Rect(w, 0, w, h));
+//    cv::resize(rectifyImageR2, canvasPart, canvasPart.size(), 0, 0, INTER_LINEAR);
+//    Rect vroiR(cvRound(validROIR.x*sf), cvRound(validROIR.y*sf),
+//        cvRound(validROIR.width*sf), cvRound(validROIR.height*sf));
+//    rectangle(canvasPart, vroiR, Scalar(0, 255, 0), 3, 8);
 
-    //_cprintf("Painted ImageR\n");
+//    //_cprintf("Painted ImageR\n");
 
-    //画上对应的线条
-    for (int i = 0; i < canvas.rows; i += 16)
-        line(canvas, Point(0, i), Point(canvas.cols, i), Scalar(0, 255, 0), 1, 8);
+//    //画上对应的线条
+//    for (int i = 0; i < canvas.rows; i += 16)
+//        line(canvas, Point(0, i), Point(canvas.cols, i), Scalar(0, 255, 0), 1, 8);
 
-    imshow("rectified", canvas);
-    //_cprintf("wait key\n");
-    waitKey(0);
+//    imshow("rectified", canvas);
+//    //_cprintf("wait key\n");
+//    waitKey(0);
 
-    cv::destroyAllWindows();
-    waitKey(1);
+//    cv::destroyAllWindows();
+//    waitKey(1);
 
 }
 
@@ -1520,7 +1520,7 @@ void opencv::circleLbp_clicked()
 {
     QImage Qtemp0,Qtemp,Qtemp1,Qtemp2;
 
-    Mat Img = imread("../project/images/opencv_pic/lena.jpg");
+    Mat Img = imread("../project/opencv_src/lena.jpg");
 
     Mat temp;
     cvtColor(Img, temp, CV_BGR2RGB);//BGR convert to RGB
@@ -1532,7 +1532,7 @@ void opencv::circleLbp_clicked()
     ui->label->resize(Qtemp.size());
     ui->label->show();
 
-    Mat img = cv::imread("../project/images/opencv_pic/lena.jpg", 0);
+    Mat img = cv::imread("../project/opencv_src/lena.jpg", 0);
     //namedWindow("image");
     //imshow("image", img);
 
@@ -1577,8 +1577,8 @@ void opencv::targetDet_clicked()
 {
     QImage Qtemp,Qtemp1;
 
-    Mat temp0 = imread("../project/images/opencv_pic/lena.jpg");
-    Mat temp1 = imread("../project/images/opencv_pic/lena-1.jpg");
+    Mat temp0 = imread("../project/opencv_src/lena.jpg");
+    Mat temp1 = imread("../project/opencv_src/lena-1.jpg");
     Mat Img0,Img1,Img2;
 
     cvtColor(temp0, Img0, COLOR_BGR2HSV);
@@ -1657,8 +1657,8 @@ void opencv::modelCheck_clicked()
     QImage Qtemp,Qtemp1;
     double minVal; double maxVal; Point minLoc; Point maxLoc;
 
-    Mat Img0 = imread("../project/images/opencv_pic/lena.jpg");
-    Mat Img1 = imread("../project/images/opencv_pic/lena-1.jpg");
+    Mat Img0 = imread("../project/opencv_src/lena.jpg");
+    Mat Img1 = imread("../project/opencv_src/lena-1.jpg");
 
     Mat result;
 
@@ -1841,37 +1841,39 @@ void callBack(int, void*)
 }
 void opencv::colorFit_clicked()
 {
-    img_color = imread("../project/images/opencv_pic/color.jpg");
-    if (!img_color.data || img_color.channels() != 3)
-        return;
-    namedWindow(windowName, CV_WINDOW_AUTOSIZE);
-    imshow(windowName, img_color);
-    //彩色图像的灰度值归一化
-    img_color.convertTo(bgr_color, CV_32FC3, 1.0 / 255, 0);
-    //颜色空间转换
-    cvtColor(bgr_color, hsv_color, COLOR_BGR2HSV);
-    //定义输出图像的显示窗口
-    namedWindow(dstName, WINDOW_GUI_EXPANDED);
-    //调节色度 H
-    createTrackbar("hmin", dstName, &hsv_hmin, hsv_hmin_Max, callBack);
-    createTrackbar("hmax", dstName, &hsv_hmax, hsv_hmax_Max, callBack);
-    //调节饱和度 S
-    createTrackbar("smin", dstName, &hsv_smin, hsv_smin_Max, callBack);
-    createTrackbar("smax", dstName, &hsv_smax, hsv_smax_Max, callBack);
-    //调节亮度 V
-    createTrackbar("vmin", dstName, &hsv_vmin, hsv_vmin_Max, callBack);
-    createTrackbar("vmax", dstName, &hsv_vmax, hsv_vmax_Max, callBack);
-    callBack(0, 0);
-    waitKey(0);
-    cv::destroyWindow(dstName);
-    cv::destroyWindow(windowName);
-    waitKey(1);
+//    img_color = imread("../project/opencv_src/color.jpg");
+//    if (!img_color.data || img_color.channels() != 3)
+//        return;
+//    namedWindow(windowName, CV_WINDOW_AUTOSIZE);
+//    imshow(windowName, img_color);
+//    //彩色图像的灰度值归一化
+//    img_color.convertTo(bgr_color, CV_32FC3, 1.0 / 255, 0);
+//    //颜色空间转换
+//    cvtColor(bgr_color, hsv_color, COLOR_BGR2HSV);
+//    //定义输出图像的显示窗口
+//    namedWindow(dstName, WINDOW_GUI_EXPANDED);
+//    //调节色度 H
+//    createTrackbar("hmin", dstName, &hsv_hmin, hsv_hmin_Max, callBack);
+//    createTrackbar("hmax", dstName, &hsv_hmax, hsv_hmax_Max, callBack);
+//    //调节饱和度 S
+//    createTrackbar("smin", dstName, &hsv_smin, hsv_smin_Max, callBack);
+//    createTrackbar("smax", dstName, &hsv_smax, hsv_smax_Max, callBack);
+//    //调节亮度 V
+//    createTrackbar("vmin", dstName, &hsv_vmin, hsv_vmin_Max, callBack);
+//    createTrackbar("vmax", dstName, &hsv_vmax, hsv_vmax_Max, callBack);
+//    callBack(0, 0);
+//    waitKey(0);
+//    cv::destroyWindow(dstName);
+//    cv::destroyWindow(windowName);
+//    waitKey(1);
 }
 void opencv::gaber_clicked()
 {
-    Mat src = imread("../project/images/opencv_pic/lena.jpg", IMREAD_GRAYSCALE);
-    namedWindow("input", CV_WINDOW_AUTOSIZE);
-    imshow("input", src);
+    QImage Qtemp,Qtemp1;
+
+    Mat src = imread("../project/opencv_src/lena.jpg", IMREAD_GRAYSCALE);
+//    namedWindow("input", CV_WINDOW_AUTOSIZE);
+//    imshow("input", src);
     Mat src_f;
     src.convertTo(src_f, CV_32F);
     // 参数初始化
@@ -1906,10 +1908,10 @@ void opencv::gaber_clicked()
     //imwrite("F://program//image//gabor3.jpg", dst3);
     convertScaleAbs(destArray[3], dst4);
     //imwrite("F://program//image//gabor4.jpg", dst4);
-    imshow("gabor1", dst1);
-    imshow("gabor2", dst2);
-    imshow("gabor3", dst3);
-    imshow("gabor4", dst4);
+//    imshow("gabor1", dst1);
+//    imshow("gabor2", dst2);
+//    imshow("gabor3", dst3);
+//    imshow("gabor4", dst4);
     // 合并结果
     add(destArray[0], destArray[1], destArray[0]);
     add(destArray[2], destArray[3], destArray[2]);
@@ -1920,24 +1922,41 @@ void opencv::gaber_clicked()
     Mat gray, binary;
     // cvtColor(dst, gray, COLOR_BGR2GRAY);
     threshold(dst, binary, 0, 255, THRESH_BINARY_INV | THRESH_OTSU);
-    imshow("result", dst);
-    imshow("binary", binary);
+
+//    imshow("result", dst);
+//    imshow("binary", binary);
+
+    Qtemp = QImage((const uchar*)(dst.data), dst.cols, dst.rows, dst.cols*dst.channels(), QImage::Format_Grayscale8);
+    ui->label_2->setPixmap(QPixmap::fromImage(Qtemp));
+    Qtemp = Qtemp.scaled(250, 250, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    ui->label_2->setScaledContents(true);
+    ui->label_2->resize(Qtemp.size());
+    ui->label_2->show();
+
+    Qtemp1 = QImage((const uchar*)(binary.data), binary.cols, binary.rows, binary.cols*binary.channels(), QImage::Format_Grayscale8);
+    ui->label_3->setPixmap(QPixmap::fromImage(Qtemp1));
+    Qtemp1 = Qtemp1.scaled(250, 250, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    ui->label_3->setScaledContents(true);
+    ui->label_3->resize(Qtemp1.size());
+    ui->label_3->show();
+
+
     //imwrite("F://program//image//result_01.png", binary);
-    waitKey(0);
-    cv::destroyWindow("input");
-    cv::destroyWindow("gabor1");
-    cv::destroyWindow("gabor2");
-    cv::destroyWindow("gabor3");
-    cv::destroyWindow("gabor4");
-    cv::destroyWindow("result");
-    cv::destroyWindow("binary");
-    waitKey(1);
+//    waitKey(0);
+//    cv::destroyWindow("input");
+//    cv::destroyWindow("gabor1");
+//    cv::destroyWindow("gabor2");
+//    cv::destroyWindow("gabor3");
+//    cv::destroyWindow("gabor4");
+//    cv::destroyWindow("result");
+//    cv::destroyWindow("binary");
+//    waitKey(1);
 }
 
 void opencv::SIFT_clicked()
 {
-//    Mat src1 = imread("../project/images/opencv_pic/1.1.jpg", 1);
-//    Mat src2 = imread("../project/images/opencv_pic/1.2.jpg", 1);
+//    Mat src1 = imread("../project/opencv_src/1.1.jpg", 1);
+//    Mat src2 = imread("../project/opencv_src/1.2.jpg", 1);
 //    imshow("src1", src1);
 //    imshow("src2", src2);
 
@@ -2000,8 +2019,8 @@ void opencv::SIFT_clicked()
 
 void opencv::orb_clicked()
 {
-    Mat obj = imread("../project/images/opencv_pic/1.1.jpg");   //载入目标图像
-    Mat scene = imread("../project/images/opencv_pic/1.2.jpg"); //载入场景图像
+    Mat obj = imread("../project/opencv_src/1.1.jpg");   //载入目标图像
+    Mat scene = imread("../project/opencv_src/1.2.jpg"); //载入场景图像
     if (obj.empty() || scene.empty())
     {
         cout << "Can't open the picture!\n";
@@ -2236,36 +2255,37 @@ void opencv::svmTest_clicked()
 
 void opencv::wordTest_clicked()
 {
-//    Ptr<ml::SVM> svm1 = ml::SVM::load("../project/sample/SVM_HOG.xml");
+#if !__arm__
+    Ptr<ml::SVM> svm1 = ml::SVM::load("../project/opencv_src/sample/SVM_HOG.xml");
 
-//    if (svm1->empty())
-//    {
-//        cout<< "load svm detector failed!!!\n"<< endl;
-//        return;
-//    }
+    if (svm1->empty())
+    {
+        cout<< "load svm detector failed!!!\n"<< endl;
+        return;
+    }
 
-//    Mat testimg;
-//    testimg = imread("../project/sample/9/0.png");
-//    cv::resize(testimg, testimg, Size(28, 28), 1);
-//    imshow("src", testimg);
-//    //waitKey(0);
+    Mat testimg;
+    testimg = imread("../project/opencv_src/sample/9/0.png");
+    cv::resize(testimg, testimg, Size(28, 28), 1);
+    imshow("src", testimg);
+    //waitKey(0);
 
-//    HOGDescriptor hog(Size(14, 14), Size(7, 7), Size(1, 1), Size(7, 7), 9);
-//    vector<float> imgdescriptor;
-//    hog.compute(testimg, imgdescriptor, Size(5, 5));
-//    Mat sampleMat;
-//    sampleMat.create(1, imgdescriptor.size(), CV_32FC1);
+    HOGDescriptor hog(Size(14, 14), Size(7, 7), Size(1, 1), Size(7, 7), 9);
+    vector<float> imgdescriptor;
+    hog.compute(testimg, imgdescriptor, Size(5, 5));
+    Mat sampleMat;
+    sampleMat.create(1, imgdescriptor.size(), CV_32FC1);
 
-//    for (int i = 0; i < imgdescriptor.size(); i++)
-//    {
-//        sampleMat.at<float>(0, i) = imgdescriptor[i];//第num个样本的特征向量中的第i个元素
-//    }
-//    int ret = svm1->predict(sampleMat);
-//    cout << "ret= " << ret <<endl;
+    for (int i = 0; i < imgdescriptor.size(); i++)
+    {
+        sampleMat.at<float>(0, i) = imgdescriptor[i];//第num个样本的特征向量中的第i个元素
+    }
+    int ret = svm1->predict(sampleMat);
+    cout << "ret= " << ret <<endl;
 
-//    waitKey(0);
-//    cv::destroyWindow("src");
-//    waitKey(1);
+    waitKey(0);
+    cv::destroyWindow("src");
+    waitKey(1);
 }
 
 
@@ -2285,7 +2305,7 @@ double compute_sum_of_rect(Mat src,Rect r){
 void opencv::Haar1_clicked()
 {
     Mat src_img;
-    src_img = imread("../project/images/opencv_pic/lena.jpg");
+    src_img = imread("../project/opencv_src/lena.jpg");
     if(src_img.empty()){
         cout<<"error.could not find"<<endl;
         return;
@@ -2322,12 +2342,13 @@ void opencv::Haar1_clicked()
     cv::destroyWindow("gray_img");
     cv::destroyWindow("dst");
     waitKey(1);
+#endif
 }
 
 void opencv::Haar2_clicked()
 {
     Mat src_img;
-    src_img = imread("../project/images/opencv_pic/lena.jpg");
+    src_img = imread("../project/opencv_src/lena.jpg");
     if(src_img.empty()){
         cout<<"error.could not find"<<endl;
         return;
@@ -2448,6 +2469,7 @@ void stereo_match(int, void*)
 }
 void opencv::camera_clicked()
 {
+#if !__arm__
     // TODO: 在此添加控件通知处理程序代码
     //立体校正
     stereoRectify(cameraMatrixL, distCoeffL, cameraMatrixR, distCoeffR, imageSize, R_new, T_new, Rl, Rr, Pl, Pr, Q, CALIB_ZERO_DISPARITY,
@@ -2455,9 +2477,9 @@ void opencv::camera_clicked()
     initUndistortRectifyMap(cameraMatrixL, distCoeffL, Rl, Pr, imageSize, CV_32FC1, mapLx, mapLy);
     initUndistortRectifyMap(cameraMatrixR, distCoeffR, Rr, Pr, imageSize, CV_32FC1, mapRx, mapRy);
 
-    rgbImageL = imread("../project/camer_cab/left01.jpg", CV_LOAD_IMAGE_COLOR);
+    rgbImageL = imread("../project/opencv_src/camer_cab/left01.jpg", CV_LOAD_IMAGE_COLOR);
     cvtColor(rgbImageL, grayImageL, CV_BGR2GRAY);
-    rgbImageR = imread("../project/camer_cab/right01.jpg", CV_LOAD_IMAGE_COLOR);
+    rgbImageR = imread("../project/opencv_src/camer_cab/right01.jpg", CV_LOAD_IMAGE_COLOR);
     cvtColor(rgbImageR, grayImageR, CV_BGR2GRAY);
 
     imshow("ImageL Before Rectify", grayImageL);
@@ -2509,7 +2531,7 @@ void opencv::camera_clicked()
     //画上对应的线条
     for (int i = 0; i < canvas.rows; i += 16)
         line(canvas, Point(0, i), Point(canvas.cols, i), Scalar(0, 255, 0), 1, 8);
-    imshow("rectified", canvas);
+//    imshow("rectified", canvas);
 
     /*
     立体匹配
@@ -2527,6 +2549,6 @@ void opencv::camera_clicked()
 
     cv::destroyAllWindows();
     waitKey(1);
-
+#endif
 }
 

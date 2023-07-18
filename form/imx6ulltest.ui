@@ -45,7 +45,7 @@ color: white;
 </string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -91,9 +91,6 @@ color: white;
          </item>
          <item>
           <widget class="QPushButton" name="ledBt">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
              <horstretch>0</horstretch>
@@ -113,7 +110,7 @@ background:#3c3c3c;
 color: white;</string>
            </property>
            <property name="text">
-            <string/>
+            <string>LED</string>
            </property>
           </widget>
          </item>
@@ -148,7 +145,7 @@ background:#3c3c3c;
 color: white;</string>
            </property>
            <property name="text">
-            <string/>
+            <string>BEEP)</string>
            </property>
           </widget>
          </item>
@@ -192,6 +189,19 @@ color: white;</string>
           </size>
          </property>
         </spacer>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label_11">
+         <property name="styleSheet">
+          <string notr="true">font-size: 40px;text-align: center;</string>
+         </property>
+         <property name="text">
+          <string>Hello World</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>

@@ -30,6 +30,9 @@ public:
     explicit imx6ullTest(QWidget *parent = nullptr);
     ~imx6ullTest();
 
+    void chart_init();
+    void hardware_init();
+
 private:
     Ui::imx6ullTest *ui;
 
@@ -47,8 +50,6 @@ private:
     /* icm20608 */
     Icm20608 *icm20608;
 
-
-
     /* 横纵坐标轴对象 */
     QValueAxis *m_axisX, *m_axisY;
 
@@ -59,7 +60,7 @@ private:
     QSplineSeries *splineSeries2;       //ps曲线
 
     /* 横纵坐标最大显示范围 */
-    const int AXIS_MAX_X = 40, AXIS_MAX_Y = 50;
+    const int AXIS_MAX_X = 40, AXIS_MAX_Y = 40;
 
     /* 用来记录数据点数 */
     int pointCount = 0;
@@ -81,7 +82,6 @@ private slots:
 
 /* led相关  */
 private:
-
     /* 文件 */
     QFile file;
 
@@ -97,7 +97,6 @@ private slots:
 
 /* beep相关 */
 private:
-
     /* 文件 */
     QFile file_beep;
 

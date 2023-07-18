@@ -14,17 +14,28 @@ imx6ullTest::imx6ullTest(QWidget *parent) :
 {
     ui->setupUi(this);
 
+
+
+    chart_init();
+    hardware_init();
+
     m_timer = new QTimer(this);
     m_timer->setSingleShot(false);
-
 
     connect(ui->pushButton, SIGNAL(clicked()), this, SLOT(on_pushButton_clicked()));
     connect(ui->btnClear, SIGNAL(clicked(bool)), this, SLOT(slotBtnClear()));
     connect(ui->btnStartAndStop, SIGNAL(clicked(bool)), this, SLOT(slotBtnStartAndStop()));
+}
 
-    //
+imx6ullTest::~imx6ullTest()
+{
+    delete ui;
+}
+
+
+void imx6ullTest::chart_init()
+{
     // 创建横纵坐标轴并设置显示范围
-    //
     m_axisX = new QValueAxis();
     m_axisY = new QValueAxis();
     m_axisX->setLabelsColor(Qt::white);
@@ -85,11 +96,11 @@ imx6ullTest::imx6ullTest(QWidget *parent) :
 
     ui->graphicsView->setChart(m_chart);                         // 将图表对象设置到graphicsView上进行显示
     ui->graphicsView->setRenderHint(QPainter::Antialiasing);       // 设置渲染：抗锯齿，如果不设置那么曲线就显得不平滑
-
-
-
+}
+void imx6ullTest::hardware_init()
+{  
+#if __arm__
     ap3216c = new Ap3216c(this);
-
     icm20608 = new Icm20608(this);
     /* 只能在开发板上开启获取数据，Ubuntu上是没有ap3216c传感器的 */
 
@@ -99,11 +110,8 @@ imx6ullTest::imx6ullTest(QWidget *parent) :
     connect(icm20608, SIGNAL(icm20608DataChanged()),
             this, SLOT(getIcm20608Data()));
 
-
-
     /* led相关------------------------------------------------------------ */
     system("echo none > /sys/class/leds/sys-led/trigger");
-//    system("echo none > /sys/class/leds/red/trigger");
 
     /* 开发板的LED控制接口 */
     file.setFileName("/sys/devices/platform/leds/leds/sys-led/brightness");
@@ -126,11 +134,7 @@ imx6ullTest::imx6ullTest(QWidget *parent) :
 
     /* 获取BEEP的状态 */
     getBeepState();
-}
-
-imx6ullTest::~imx6ullTest()
-{
-    delete ui;
+#endif
 }
 
 void imx6ullTest::slotBtnClear()
@@ -216,9 +220,6 @@ void imx6ullTest::getIcm20608Data()
 
     ui->tempdataEdit->setText(temp_data);
 }
-
-
-
 
 
 void imx6ullTest::getAp3216cData()

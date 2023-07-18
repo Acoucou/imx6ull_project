@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>mqtt_client</class>
+ <widget class="QWidget" name="mqtt_client">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget
+{
+background-color: #1A1A1A;
+}</string>
+  </property>
+  <widget class="QLabel" name="Topic_label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(191, 64, 64, 0);</string>
+   </property>
+   <property name="text">
+    <string>Topic</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="QoS_lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>190</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(191, 64, 64, 0);
+color: rgb(255, 255, 255);
+border-style: solid; 
+border-width: 1px; 
+border-color: white;
+border-radius:15px;
+font-size: 18px;
+</string>
+   </property>
+   <property name="text">
+    <string>0</string>
+   </property>
+  </widget>
+  <widget class="QPlainTextEdit" name="log_plainTextEdit">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>390</y>
+     <width>741</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(191, 64, 64, 0);
+color: rgb(255, 255, 255);
+border-style: solid; 
+border-width: 1px; 
+border-color: white;
+border-radius:20px;
+font-size: 18px;</string>
+   </property>
+   <property name="centerOnScroll">
+    <bool>false</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Conection_label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>0</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(191, 64, 64, 0);
+font-weight: bold;
+font-size:25px;</string>
+   </property>
+   <property name="text">
+    <string>Conection</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Host_label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>40</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(191, 64, 64, 0);</string>
+   </property>
+   <property name="text">
+    <string>Host</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Port_label">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>40</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(191, 64, 64, 0);</string>
+   </property>
+   <property name="text">
+    <string>Port</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Topic_lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>190</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(191, 64, 64, 0);
+color: rgb(255, 255, 255);
+border-style: solid; 
+border-width: 1px; 
+border-color: white;
+border-radius:15px;
+font-size: 18px;
+</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Port_lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>80</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(191, 64, 64, 0);
+color: rgb(255, 255, 255);
+border-style: solid; 
+border-width: 1px; 
+border-color: white;
+border-radius:15px;
+font-size: 18px;
+</string>
+   </property>
+   <property name="text">
+    <string>1883</string>
+   </property>
+   <property name="placeholderText">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="QoS_label">
+   <property name="geometry">
+    <rect>
+     <x>270</x>
+     <y>150</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(191, 64, 64, 0);</string>
+   </property>
+   <property name="text">
+    <string>QoS</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Host_lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>80</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(191, 64, 64, 0);
+color: rgb(255, 255, 255);
+border-style: solid; 
+border-width: 1px; 
+border-color: white;
+border-radius:15px;
+font-size: 18px;
+</string>
+   </property>
+   <property name="text">
+    <string>120.26.202.2</string>
+   </property>
+   <property name="placeholderText">
+    <string>120.26.202.2</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Subscribe_label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>110</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(191, 64, 64, 0);
+font-weight: bold;
+font-size:25px;</string>
+   </property>
+   <property name="text">
+    <string>Subscribe</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="connect_pushbutton">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>80</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(138, 226, 52);
+background-color: rgb(78, 154, 6);
+color: rgb(255, 255, 255);
+border-radius:15px;
+font-size: 18px;
+</string>
+   </property>
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Subscribe_pushbutton">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>190</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(78, 154, 6);
+color: rgb(255, 255, 255);
+border-radius:15px;
+font-size: 18px;
+</string>
+   </property>
+   <property name="text">
+    <string>Subscribe</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Topic_lineEdit_2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>300</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(191, 64, 64, 0);
+color: rgb(255, 255, 255);
+border-style: solid; 
+border-width: 1px; 
+border-color: white;
+border-radius:15px;
+font-size: 18px;
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Publish_label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>220</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(191, 64, 64, 0);
+font-weight: bold;
+font-size:25px;</string>
+   </property>
+   <property name="text">
+    <string>Publish</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Topic_label_2">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>260</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(191, 64, 64, 0);</string>
+   </property>
+   <property name="text">
+    <string>Topic</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="Publish_pushbutton">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>300</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(78, 154, 6);
+color: rgb(255, 255, 255);
+border-radius:15px;
+font-size: 18px;
+</string>
+   </property>
+   <property name="text">
+    <string>Publish</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="Msg_lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>300</y>
+     <width>191</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgba(191, 64, 64, 0);
+color: rgb(255, 255, 255);
+border-style: solid; 
+border-width: 1px; 
+border-color: white;
+border-radius:15px;
+font-size: 18px;
+</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Msg_label">
+   <property name="geometry">
+    <rect>
+     <x>280</x>
+     <y>260</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(191, 64, 64, 0);</string>
+   </property>
+   <property name="text">
+    <string>Msg</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="Log_label">
+   <property name="geometry">
+    <rect>
+     <x>-10</x>
+     <y>340</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);
+background-color: rgba(191, 64, 64, 0);
+font-weight: bold;
+font-size:25px;</string>
+   </property>
+   <property name="text">
+    <string>Log</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
