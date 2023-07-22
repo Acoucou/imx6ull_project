@@ -1,0 +1,10 @@
+prefix=//home/coucou/linux/qt/tslib-1.21/arm-tslib
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: tslib
+Description: Touchscreen Access Library
+Version: 1.21
+Libs: -L${libdir} -lts
+Cflags: -I${includedir}

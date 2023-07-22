@@ -1,0 +1,114 @@
+QWidget {
+background: "#25242a"
+}
+
+QWidget#listMask {
+border-image: url(:/images/music_pic/mask.png);
+background-color: transparent;
+}
+
+QListWidget#listWidget {
+color:white;
+font-size: 15px;
+border:none;
+}
+
+QListWidgetlistWidget:item:active {
+background: transparent;
+}
+
+QListWidget#listWidget:item {
+background: transparent;
+height:60;
+}
+
+QListWidget#listWidget:item:selected {
+color:#5edcf3;
+background: transparent;
+}
+
+QListWidget#listWidget:item:hover {
+background: transparent;
+color:#5edcf3;
+border:none;
+}
+
+QPushButton#btn_play {
+border-image:url(:/images/music_pic/btn_play1.png);
+}
+
+QPushButton#btn_play:hover {
+border-image:url(:/images/music_pic/btn_play2.png);
+}
+
+QPushButton#btn_play:checked {
+border-image:url(:/images/music_pic/btn_pause1.png);
+}
+
+QPushButton#btn_play:checked:hover {
+border-image:url(:/images/music_pic/btn_pause2.png);
+}
+
+QPushButton#btn_previous {
+border-image:url(:/images/music_pic/btn_previous1.png);
+}
+
+QPushButton#btn_previous:hover {
+border-image:url(:/images/music_pic/btn_previous2.png);
+}
+
+QPushButton#btn_next {
+border-image:url(:/images/music_pic/btn_next1.png);
+}
+
+QPushButton#btn_next:hover {
+border-image:url(:/images/music_pic/btn_next2.png);
+}
+
+QPushButton#btn_favorite {
+border-image:url(:/images/music_pic/btn_favorite_no.png);
+}
+
+QPushButton#btn_favorite:checked {
+border-image:url(:/images/music_pic/btn_favorite_yes.png);
+}
+
+QPushButton#btn_menu {
+border-image:url(:/images/music_pic/btn_menu1.png);
+}
+
+QPushButton#btn_menu:hover {
+border-image:url(:/images/music_pic/btn_menu2.png);
+}
+
+QPushButton#btn_mode {
+border-image:url(:/images/music_pic/btn_listcircle1.png);
+}
+
+QPushButton#btn_mode:hover {
+border-image:url(:/images/music_pic/btn_listcircle2.png);
+}
+
+QPushButton#btn_mode {
+border-image:url(:/images/music_pic/btn_listcircle1.png);
+}
+
+QPushButton#btn_mode:hover {
+border-image:url(:/images/music_pic/btn_listcircle2.png);
+}
+
+QPushButton#btn_volume {
+border-image:url(:/images/music_pic/btn_volume1.png);
+}
+
+QPushButton#btn_volume:hover {
+border-image:url(:/images/music_pic/btn_volume2.png);
+}
+
+QSlider#durationSlider:handle:horizontal {
+border-image:url(:/images/music_pic/handle.png);
+}
+
+QSlider#durationSlider:sub-page:horizontal {
+border-image:url(:/images/music_pic/sub-page.png);
+}

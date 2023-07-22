@@ -1,0 +1,6 @@
+QMAKE_PRL_BUILD_DIR = /home/coucou/linux/build-qtmqtt-Desktop_Qt_5_12_9_GCC_64bit-Debug/src/mqtt
+QMAKE_PRO_INPUT = mqtt.pro
+QMAKE_PRL_TARGET = libQt5Mqtt.so.5.12.9
+QMAKE_PRL_CONFIG = lex yacc debug depend_includepath testcase_targets import_plugins import_qpa_plugin qt_build_extra file_copies qmake_use qt warn_on link_prl incremental shared linux unix posix gcc sse2 aesni sse3 ssse3 sse4_1 sse4_2 avx avx2 avx512f avx512bw avx512cd avx512dq avx512er avx512ifma avx512pf avx512vbmi avx512vl compile_examples enable_new_dtags f16c force_debug_info largefile precompile_header rdrnd shani x86SimdAlways prefix_build force_independent utf8_source create_prl link_prl prepare_docs qt_docs_targets no_private_qt_headers_warning QTDIR_build qt_example_installs exceptions_off testcase_exceptions explicitlib warning_clean debug qml_debug c++11 relative_qt_rpath qmake_cache target_qt c++11 strict_c++ c++14 c99 c11 hide_symbols bsymbolic_functions separate_debug_info split_incpath qt_install_headers need_fwd_pri qt_install_module create_cmake compiler_supports_fpmath create_pc create_libtool have_target dll debug_info thread moc resources
+QMAKE_PRL_VERSION = 5.12.9
+QMAKE_PRL_LIBS = -L/home/qt/openssl-1.1.1d/lib /opt/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Network.so /opt/Qt5.12.9/5.12.9/gcc_64/lib/libQt5Core.so -lpthread

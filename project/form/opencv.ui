@@ -1,0 +1,1035 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>opencv</class>
+ <widget class="QWidget" name="opencv">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>824</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>824</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>824</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>20</y>
+     <width>211</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>211</width>
+     <height>221</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:transparent; 
+background:#3c3c3c;
+color: white;
+border-radius:20px;</string>
+   </property>
+   <property name="text">
+    <string>channel_1</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>330</y>
+     <width>211</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>211</width>
+     <height>221</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:transparent; 
+background:#3c3c3c;
+color: white;
+border-radius:20px;</string>
+   </property>
+   <property name="text">
+    <string>channel_2</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>330</y>
+     <width>211</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>211</width>
+     <height>221</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:transparent; 
+background:#3c3c3c;
+color: white;
+border-radius:20px;</string>
+   </property>
+   <property name="text">
+    <string>channel_3</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>20</y>
+     <width>211</width>
+     <height>221</height>
+    </rect>
+   </property>
+   <property name="maximumSize">
+    <size>
+     <width>211</width>
+     <height>221</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background:transparent; 
+background:#3c3c3c;
+color: white;
+border-radius:20px;</string>
+   </property>
+   <property name="text">
+    <string>src</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>20</y>
+     <width>111</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(114, 159, 207);
+background: black;
+border-radius:20px;</string>
+   </property>
+   <property name="title">
+    <string> 图像预处理</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <widget class="QPushButton" name="laplaceSharpen">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>150</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Laplace锐化</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="gradSharpen">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>120</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>梯度锐化</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="grayLeval">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>灰度直方图</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="grayProcess">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>灰度处理</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="grayBalance">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>90</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>灰度均衡</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_2">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>20</y>
+     <width>111</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(114, 159, 207);
+background: black;
+border-radius:20px;</string>
+   </property>
+   <property name="title">
+    <string>滤波</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <widget class="QPushButton" name="gaussFilter">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>150</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>高斯滤波</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="windowFilter">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>90</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>边窗滤波</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="formFilter">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>120</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>形态学滤波</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="middleFilter">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>中值滤波</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="averageFilter">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>均值滤波</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>20</y>
+     <width>111</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(114, 159, 207);
+background: black;
+border-radius:20px;</string>
+   </property>
+   <property name="title">
+    <string>特征明显</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <widget class="QPushButton" name="colorFit">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>120</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>颜色匹配</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="targetDet">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>直方图检测</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="circleLbp">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>LBP</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="gaber">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>150</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Garbor滤波</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="modelCheck">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>90</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>模板匹配</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_4">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>360</y>
+     <width>111</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(114, 159, 207);
+background: black;
+border-radius:20px;</string>
+   </property>
+   <property name="title">
+    <string>边缘检测</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <widget class="QPushButton" name="krischEdge">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>150</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Krisch</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="laplaceEdge">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>90</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Laplace</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sobelEdge">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Sobel</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="prewitt">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>120</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Prewitt</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="robertsEdge">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Roberts</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_5">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>360</y>
+     <width>111</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(114, 159, 207);
+background: black;
+border-radius:20px;</string>
+   </property>
+   <property name="title">
+    <string>背景处理</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <widget class="QPushButton" name="thresholdSeg">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>阈值分割</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Kittler">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>90</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Kittler</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="mixGuass">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>150</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>高斯混合背景</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="OSTU">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>OSTU</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="frameDiff">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>120</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>帧间差分</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_6">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>360</y>
+     <width>111</width>
+     <height>191</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(114, 159, 207);
+background: black;
+border-radius:20px;</string>
+   </property>
+   <property name="title">
+    <string>特征提取</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <widget class="QPushButton" name="wordTest">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>90</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>字符测试</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Haar1">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>150</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Haar算法-水平</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Haar2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>120</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>Haar算法-竖直</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="orb">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>ORB</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="svmTest">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>坐标点SVM</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QPushButton" name="seletpic">
+   <property name="geometry">
+    <rect>
+     <x>180</x>
+     <y>270</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: rgb(114, 159, 207);</string>
+   </property>
+   <property name="text">
+    <string>选择图像</string>
+   </property>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_7">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>230</y>
+     <width>111</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(114, 159, 207);
+background: black;
+border-radius:20px;</string>
+   </property>
+   <property name="title">
+    <string>噪声</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <widget class="QPushButton" name="guassNoise">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>高斯噪声</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="saltNoise">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>椒盐噪声</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_8">
+   <property name="geometry">
+    <rect>
+     <x>580</x>
+     <y>230</y>
+     <width>111</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(114, 159, 207);
+background: black;
+border-radius:20px;</string>
+   </property>
+   <property name="title">
+    <string>摄像标定</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <widget class="QPushButton" name="camera2">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>摄像机标定</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="camera">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>立体匹配</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_9">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>230</y>
+     <width>111</width>
+     <height>101</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(114, 159, 207);
+background: black;
+border-radius:20px;</string>
+   </property>
+   <property name="title">
+    <string>图像变换</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+   <widget class="QPushButton" name="perspective">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>透视变换</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="affine">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>30</y>
+      <width>110</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">margin-top:3px;
+background:transparent; 
+background:#3c3c3c;
+color: white;</string>
+    </property>
+    <property name="text">
+     <string>仿射变换</string>
+    </property>
+   </widget>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

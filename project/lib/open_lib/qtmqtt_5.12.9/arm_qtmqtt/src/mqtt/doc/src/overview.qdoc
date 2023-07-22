@@ -1,0 +1,204 @@
+/****************************************************************************
+**
+** Copyright (C) 2018 The Qt Company Ltd.
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of the documentation of the Qt Toolkit.
+**
+** $QT_BEGIN_LICENSE:FDL$
+** Commercial License Usage
+** Licensees holding valid commercial Qt licenses may use this file in
+** accordance with the commercial license agreement provided with the
+** Software or, alternatively, in accordance with the terms contained in
+** a written agreement between you and The Qt Company. For licensing terms
+** and conditions see https://www.qt.io/terms-conditions. For further
+** information use the contact form at https://www.qt.io/contact-us.
+**
+** GNU Free Documentation License Usage
+** Alternatively, this file may be used under the terms of the GNU Free
+** Documentation License version 1.3 as published by the Free Software
+** Foundation and appearing in the file included in the packaging of
+** this file. Please review the following information to ensure
+** the GNU Free Documentation License version 1.3 requirements
+** will be met: https://www.gnu.org/licenses/fdl-1.3.html.
+** $QT_END_LICENSE$
+**
+****************************************************************************/
+
+
+/*!
+    \page mqtt-overview.html
+    \title Qt MQTT Overview
+    \brief Provides insight into the MQTT protocol and the Qt MQTT module.
+
+    Qt MQTT enables you to create applications and devices that can communicate
+    over the MQ telemetry transport (MQTT) protocol. It fully complies to the
+    MQTT protocol specification.
+
+    \section1 Publish and Subscribe
+
+    \l{MQTT} is a machine-to-machine connectivity protocol that operates on the
+    publish-and-subscribe model. An MQTT client is a program or device that
+    uses MQTT to create a network connection to an MQTT server, also called a
+    \e broker. Once a connection is created, the client can send messages to the
+    broker. The other clients can subscribe to notifications on particular
+    topics sent by the client.
+
+    \image mqtt.png
+
+    For example, if \e {Client 2} subscribes to messages on \e {Topic A}, it
+    receives a notification when \e {Client 1} sends a message on that topic.
+    If \e {Client 3} subscribes to \e {Topic A} and \e {Topic B}, it receives
+    notifications about messages on both those topics.
+
+    Qt MQTT is a client solution that does not include a broker. It is
+    especially suitable for developing telemetry applications for embedded
+    devices. However, Qt MQTT has no external dependencies, and therefore the
+    implemented clients can be run on all supported Qt platforms.
+
+    \section1 Topics
+
+    Topics are stored in a hierarchical tree structure. The standard does not
+    specify how the tree should be designed, nor does it provide predefined
+    hierarchy sets. You can freely design the hierarchy as required by your
+    project. The following is an example of a topic hierarchy, where \e active
+    means all active sensors, whereas \e house and \e garage are individual
+    sensors:
+
+    \badcode
+    sensors/active
+    sensors/house/temperature
+    sensors/house/bedroom/light
+    sensors/house/livingroom/light
+    sensors/garage/temperature
+    sensors/garage/light
+    \endcode
+
+    \section1 Subscribing to Topics Using Wildcards
+
+    When clients subscribe to topics, they can use the hash mark (#) and plus
+    sign (+) as wildcards. The hash mark indicates that the client wants to
+    receive notifications on all messages on a topic and its subtopics. For
+    example, if a client subscribes to \e sensors/house/#, it receives all
+    messages on the \e house sensor.
+
+    The plus sign indicates that a branch on the tree can be skipped over when
+    looking for a matching subtopic. For example, if a client subscribes to
+    \e sensors/+/temperature, it receives messages on \e temperature regardless
+    of which sensor sent them. You can use multiple plus signs to skip over
+    multiple branches. For example, \e house/+/+/temperature could be used to
+    receive messages on the temperature of all rooms in all apartments in a
+    house.
+
+    \section1 Shared Subscriptions
+
+    \e {Shared subscriptions} describe a pool of subscribers to one topic
+    filter. Instead of all subscribers receiving a message, only one subscriber
+    receives it. This enables load balancing on multiple clients.
+    The format of a shared subscription is:
+
+    \badcode
+    $share/{sharename}/{topicfilter}
+    \endcode
+
+    For example, if \e {Client 1} and \e {Client 2} should share a subscription
+    to the topic \e {sensors/house/temperature}, the topic filter to subscribe
+    to is:
+
+    \badcode
+    $share/poolAB/sensors/house/temperature
+    \endcode
+
+    It is not defined in which order messages are distributed by the server.
+    This is a server specific option.
+
+    To identify whether a server supports shared subscriptions, see also
+    QMqttServerConnectionProperties::sharedSubscriptionSupported().
+
+    \section1 Topic Aliases
+
+    Structuring topics in a tree helps to separate data channels and provide a
+    logical order of information. However, this can lead to very long topic
+    names being used during the publication of messages, hence increasing
+    the size of each message.
+
+    The MQTT 5.0 protocol version introduced \e {topic aliases} to circumvent
+    this. Instead of the topic string, an integer value is sent. To create an
+    initial mapping between the client and the server, both the topic string and
+    the alias need to be part of a message. Thereafter, only the ID with an
+    empty topic is used.
+
+    This mapping can be changed at any time by using a topic alias with another
+    topic string. Note that this mapping does not necessarily apply to other
+    connections, such as connections from the server to other clients. Each
+    connection needs to create this mapping manually.
+
+    Qt MQTT provides an automated mechanism to help reduce data rates. After
+    QMqttClient creates a connection, information about topic aliases supported
+    by the server is stored. Subsequently, topic aliases are used in the
+    order the messages are published, until all available aliases are in use. A
+    user is always able to modify this mapping by using
+    QMqttPublishProperties::setTopicAlias() during publication.
+
+    When QMqttClient subscribes to a topic, the server can use topic aliases
+    as well, depending on the QMqttConnectionProperties::maximumTopicAlias()
+    value set by the client. The client automatically maps topic aliases and
+    transparently forwards messages to the user including the full topic string.
+
+    \section1 Security
+
+    The connections between the clients and the broker are secured by an
+    in-built authentication system that uses user names and passwords. Messages
+    are encrypted by using SSL/TLS at the transport layer. The standardized port
+    number for encrypted MQTT messages is 8883.
+
+    \section1 Quality of Service
+
+    The following quality of service (QoS) levels for messages are defined:
+
+    \list
+        \li \e {At most once (0)} means that messages are delivered according to
+            the best efforts of the operating environment, and therefore message
+            loss can occur. This level could be used, for example, with ambient
+            sensor data where it does not matter if an individual reading is
+            lost as the next one will be published soon after.
+        \li \e {At least once (1)} means that messages are assured to arrive but
+            duplicates can occur.
+        \li \e {Exactly once (2)} means that messages are assured to arrive
+            exactly once. This level could be used, for example, with billing
+            systems where duplicate or lost messages could lead to incorrect
+            charges being applied.
+    \endlist
+
+    \section1 Will Messages
+
+    A \e {Will Message}, also called \e testament, is a message sent from a
+    client and stored at the broker location. If the connection between the
+    client and broker breaks in an unexpected way, the Will Message will be
+    forwarded to any subscriber of the \e {Will Topic}.
+
+    Will Messages must be specified at the connecting stage. Hence, it is
+    mandatory to set them before invoking QMqttClient::connectToHost() or
+    QMqttClient::connectToHostEncrypted(). A Will Message has all the properties
+    of a regular message, as well as a Will Topic, QoS level, retained flag, and
+    message payload.
+
+    If the client disconnects from the broker in a regular fashion by calling
+    QMqttClient::disconnectFromHost(), the broker will discard the Will Message.
+    If needed, the client is responsible for sending all the required messages
+    before disconnecting.
+
+    \section1 Retained Messages
+
+    Retained messages are stored on the broker side. As future clients connect,
+    they will receive such messages. A typical use case is to store the current
+    health status of the publisher in a retained message. Subscribers will
+    instantly receive a message about the status.
+
+    A broker can only store the last retained message sent for a specified
+    topic. If a client publishes a retained message with the QoS level zero,
+    any previously retained message for its topic at the broker \e{must} be
+    discarded. The broker \e{should} store the last message, but \e{may}
+    also discard it. This depends on the implementation of the broker.
+
+*/
